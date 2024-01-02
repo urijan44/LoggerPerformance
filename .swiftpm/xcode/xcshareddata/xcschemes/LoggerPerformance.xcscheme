@@ -51,15 +51,15 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--logger print"
+            argument = "print"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--logger logger"
-            isEnabled = "YES">
+            argument = "logger"
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--logger oslog"
+            argument = "oslog"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>

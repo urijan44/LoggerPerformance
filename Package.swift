@@ -5,16 +5,20 @@ import PackageDescription
 
 let package = Package(
     name: "LoggerPerformance",
-    platforms: [.iOS(.v14), .macOS(.v12)],
     products: [
         .executable(
             name: "LoggerPerformance",
             targets: ["LoggerPerformance"]),
     ],
-    
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-argument-parser.git", exact: "1.3.0")
+    ],
     targets: [
       .executableTarget(
         name: "LoggerPerformance",
+        dependencies: [
+            .product(name: "ArgumentParser", package: "swift-argument-parser")
+        ],
         path: "./",
         resources: [
           .copy("bundle.json")

@@ -5,10 +5,6 @@
 //  Created by hoseung Lee on 12/29/23.
 //
 
-import Foundation
-import os
-import os.log
-
 let socketText = """
 {
     "type": "data",
@@ -33,72 +29,7 @@ let socketText = """
 }
 """
 
-enum LoggerClass {
-  case print
-  case oslog
-  case logger
-  
-  init(string: String) {
-    switch string {
-      case "print":
-        self = .print
-      case "oslog":
-        self = .oslog
-      case "logger":
-        self = .logger
-      default:
-        self = .print
-    }
-  }
-}
-
-let arguments = CommandLine.arguments
-var loggerType: LoggerClass = .print
-if let loggerIndex = arguments.firstIndex(of: "--logger"), arguments.count > loggerIndex + 1 {
-  loggerType = LoggerClass(string: arguments[loggerIndex + 1])
-}
-let log = OSLog(subsystem: Bundle.module.bundleIdentifier!, category: "Log")
-let logger = Logger(log)
-
-let printTimer = Timer(timeInterval: 1 / 50, repeats: true) { _ in
-  DispatchQueue.global().async {
-    print(socketText)
-  }
-}
-
-let oslogTimer = Timer(timeInterval: 1 / 50, repeats: true) { _ in
-  DispatchQueue.global().async {
-    os_log(log: log, "\(socketText)")
-  }
-}
-
-let loggerTimer = Timer(timeInterval: 1 / 50, repeats: true) { _ in
-  DispatchQueue.global().async {
-    logger.log("\(socketText)")
-  }
-}
+loggerperformance.main()
 
 
-
-let exitTask = DispatchWorkItem {
-  print("exit!")
-  exit(0)
-}
-
-
-DispatchQueue.global().asyncAfter(deadline: .now() + 20, execute: exitTask)
-let timer: Timer = {
-  switch loggerType {
-    case .print:
-      return printTimer
-    case .oslog:
-      return oslogTimer
-    case .logger:
-      return loggerTimer
-  }
-}()
-print("start!: \(loggerType)")
-RunLoop.current.add(timer, forMode: .default)
-
-RunLoop.main.run()
 

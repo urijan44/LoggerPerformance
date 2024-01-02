@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:LoggerPerformance}",
+            "name": "Debug LoggerPerformance",
+            "program": "${workspaceFolder:LoggerPerformance}/.build/debug/LoggerPerformance",
+            "preLaunchTask": "swift: Build Debug LoggerPerformance"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:LoggerPerformance}",
+            "name": "Release LoggerPerformance",
+            "program": "${workspaceFolder:LoggerPerformance}/.build/release/LoggerPerformance",
+            "preLaunchTask": "swift: Build Release LoggerPerformance"
+        }
+    ]
+}
